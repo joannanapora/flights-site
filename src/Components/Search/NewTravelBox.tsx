@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import Passengers from "./Tabs/Passengers";
 import TravelFrom from "./Tabs/TravelFrom";
 import TravelTo from "./Tabs/TravelTo";
 import Departure from "./Tabs/Departure";
+import Return from "./Tabs/Return";
 
 interface IPassengers {
   adult: number;
@@ -12,8 +13,10 @@ interface IPassengers {
 
 
 interface ITravel {
-  from: string;
-  to: string;
+  fromCountry: string;
+  fromCity: string;
+  toCountry: string;
+  toCity: string;
 }
 
 const SearchInputs = () => {
@@ -26,9 +29,13 @@ const SearchInputs = () => {
     infant: 0
   });
   const [travel, setTravel] = useState<ITravel>({
-    from: '',
-    to: ''
+    fromCountry: '',
+    fromCity: '',
+    toCountry: '',
+    toCity: '',
   });
+
+  const travellingToRef = useRef<HTMLInputElement>(null);
 
 
   const handlePassengers = (passengerType: string) => {
@@ -60,8 +67,13 @@ const SearchInputs = () => {
     }
   };
 
-  const handleCityChoice = (city:string) => {
-    setTravel({...travel, from: city});
+  const handleCityFrom = (country:string, city:string) => {
+    setTravel({...travel, fromCountry: country, fromCity: city});
+    travellingToRef.current?.focus();
+    setTab('travelTo')
+};
+const handleCityTo = (country:string, city:string) => {
+  setTravel({...travel, toCountry: country, toCity: city});
 }
 
 
@@ -80,11 +92,11 @@ const SearchInputs = () => {
       return
 
     if (openedTab === 'travelFrom') {
-      return <TravelFrom  handleCityChoice={handleCityChoice} from={travel.from} />
+      return <TravelFrom  handleCityFrom={handleCityFrom} />
     }
 
     if (openedTab === 'travelTo') {
-      return <TravelTo />
+      return <TravelTo handleCityTo={handleCityTo} />
     }
 
     if (openedTab === 'passengers') {
@@ -95,27 +107,36 @@ const SearchInputs = () => {
       return <Departure />
     }
 
+    if (openedTab === 'return') {
+      return <Return />
+    }
   };
 
+  const setValueFrom = () => travel.fromCity ? `${travel.fromCity} (${travel.fromCountry})` : '';
+  const setValueTo = () => travel.toCity ? `${travel.toCity} (${travel.toCountry})` : '';
+
+  const setTravelFrom = () => {
+    setTab('travelFrom');
+  };
 
 
   return (
 
     <div className={`flex justify-${openedTab === 'none' ? 'center' :'end'} sm:flex-row flex-col`}>
       <div className='bg-gray-700 w-full md:mr-2 rounded-lg p-1 lg:w-72 border-2 flex flex-col ' >
-        <input onClick={() => setTab('travelFrom')} placeholder="Travelling from" value={travel.from} className='h-10 w-full mb-2 p-2' /> 
-        <input onClick={() => setTab('travelTo')} placeholder="Travelling to" className='h-10 w-full mb-2 p-2' />
-        <div onClick={() => setTab('passengers')} className='cursor-pointer h-10 text-gray-400 w-full mb-2 p-2 bg-white flex justify-between' >
+        <input onClick={setTravelFrom} placeholder="Travelling from" value={setValueFrom()} className='h-10 w-full mb-2 p-2 text-sm' /> 
+        <input onClick={() => setTab('travelTo')} ref={travellingToRef} placeholder="Travelling to" value={setValueTo()} className='h-10 text-sm w-full mb-2 p-2' />
+        <div onClick={() => setTab('passengers')} className='cursor-pointer h-10 text-sm text-gray-400 w-full mb-2 p-2 bg-white flex justify-between' >
           <p>Passengers:</p>
-          <div className='text-sm font-bold text-black flex items-center w-full justify-evenly' >
+          <div className='text-xs font-bold text-black flex items-center w-full justify-evenly' >
             <p>{passengers.adult} adult</p>
             <p>{passengers.child} child</p>
             <p>{passengers.infant} infant</p>
           </div>
         </div>
-        <input onClick={() => setTab('departure')} placeholder="Departure" className='cursor-pointer h-10 w-full mb-2 p-2' />
-        <input onClick={() => setTab('return')} disabled={!way} placeholder={!way ? '' : 'Return'} className='h-10 w-full mb-2 p-2 cursor-pointer' />
-        <div className="flex w-full h-full items-end rounded-sm" role="group">
+        <input onClick={() => setTab('departure')} placeholder="Departure" className='cursor-pointer text-sm h-10 w-full mb-2 p-2' />
+        <input onClick={() => setTab('return')} disabled={!way} placeholder={!way ? '' : 'Return'} className='h-10 text-sm w-full mb-2 p-2 cursor-pointer' />
+        <div className="flex  w-full h-full items-end rounded-sm" role="group">
           <button onClick={() => handleWayChoice(true)} className={`bg-${!way ? `blue-500` : `white`} cursor-pointer w-full text-sm text-${way ? `blue-500` : `white`} border border-blue-500  px-4 py-2 mx-0 outline-none focus:shadow-outline`}>One way</button>
           <button onClick={() => handleWayChoice(false)} className={`bg-${way ? `blue-500` : `white`} cursor-pointer w-full text-sm text-${!way ? `blue-500` : `white`} border border-blue-500  px-4 py-2 mx-0 outline-none focus:shadow-outline`}>Return</button>
         </div>

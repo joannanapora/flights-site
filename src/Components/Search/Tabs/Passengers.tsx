@@ -20,7 +20,7 @@ const Passengers = ({handlePassengers, adults, children, infants}:IPassengers) =
                <MinusSvg/>
               </button>
                 <div className='w-1/3 flex justify-evenly'>
-                    <div className='font-bold text-lg mr-2 items-center ' >{adults}</div></div>
+                    <div className='font-bold mr-2 items-center ' >{adults}</div></div>
                  <button onClick={()=>handlePassengers('adult+1')} className='hover:bg-blue-200 h-full w-1/3 flex items-center justify-center'>
                <PlusSvg/>
               </button>
@@ -31,7 +31,7 @@ const Passengers = ({handlePassengers, adults, children, infants}:IPassengers) =
                <MinusSvg/>
               </button>
                 <div className='w-1/3 flex justify-evenly'>
-                    <div className='font-bold text-lg mr-2 items-center ' >{children}</div></div>
+                    <div className='font-bold mr-2 items-center ' >{children}</div></div>
                  <button onClick={()=>handlePassengers('child+1')} className='hover:bg-blue-200 h-full w-1/3 flex items-center justify-center'>
                <PlusSvg/>
               </button>
@@ -42,13 +42,13 @@ const Passengers = ({handlePassengers, adults, children, infants}:IPassengers) =
                <MinusSvg/>
               </button>
                 <div className='w-1/3 flex justify-evenly'>
-                    <div className='font-bold text-lg mr-2 items-center ' >{infants}</div></div>
+                    <div className='font-bold mr-2 items-center ' >{infants}</div></div>
                  <button onClick={()=>handlePassengers('infant+1')} className='hover:bg-blue-200 h-full w-1/3 flex items-center justify-center'>
                <PlusSvg/>
               </button>
             </div>
             <div className="flex w-full h-18 items-end rounded-sm">
-                    <button onClick={()=>handlePassengers('reset')} className="cursor-pointer w-full align-left font-serif text-sm text-white px-4 py-2 mx-0 outline-none focus:shadow-outline" >Reset</button>
+                    <button onClick={()=>handlePassengers('reset')} className="cursor-pointer w-full align-left font-serif text-xs text-white px-4 py-2 mx-0 outline-none focus:shadow-outline" >RESET</button>
                 </div>
                 </div>
         </div>

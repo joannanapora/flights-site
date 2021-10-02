@@ -30,7 +30,11 @@ module.exports = {
     },
   },
   variants: {
-    extend: {},
+    extend: {
+      animation: ['motion-safe'],
+    }
   },
-  plugins: [],
+  plugins: [
+    require("tailwindcss-scrollbar"),
+  ],
 }

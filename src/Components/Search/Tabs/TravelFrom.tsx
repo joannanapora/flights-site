@@ -41,25 +41,23 @@ const countries = [
         name: 'Ukraine',
         cities: ['Kiev', 'Odessa']
     },
-
 ]
 
 interface ITravelFrom {
-    handleCityChoice: (citye:string) => void;
-   from:string;
+    handleCityFrom: (country:string,city:string) => void;
 }
 
 
-const TravelFrom = ({handleCityChoice, from}:ITravelFrom) => {
+const TravelFrom = ({handleCityFrom}:ITravelFrom) => {
 
-    const [hoverCity, setHoverCity] = useState<string>('Argentina');
+    const [hoverCity, hoverCountry] = useState<string>('Argentina');
 
     const determineDisplayCities = () => {
-      return  countries.map((el)=>{
-            if (el.name === hoverCity) {
-                return el.cities.map((el)=>{
+      return  countries.map((country)=>{
+            if (country.name === hoverCity) {
+                return country.cities.map((city)=>{
                     return (
-                        <label onClick={()=>handleCityChoice(el)} className='text-xs w-1/2 p-2 text-gray-300 cursor-pointer hover:text-white w-full' >{el}</label>
+                        <label onClick={()=>handleCityFrom(country.name,city)} className='text-xs w-1/2 p-2 text-gray-300 cursor-pointer hover:text-white w-full' >{city}</label>
                     )
                 })
             }
@@ -68,14 +66,14 @@ const TravelFrom = ({handleCityChoice, from}:ITravelFrom) => {
 
     return (
         <div className='bg-gray-700 w-full rounded-lg lg:w-72 p-1 border-2 flex' >
-            <div className='w-1/2 flex px-2 flex-col overflow-auto h-72' >
+            <div className='w-1/2 flex px-2 flex-col overflow-auto scrollbar scrollbar-w-1 scrollbar-thumb-white scrollbar-track-gray-600 h-72' >
                 {countries.map((el) => {
                     return (
-                        <label onMouseEnter={ ()=>setHoverCity(el.name)} className='text-xs w-1/2 p-2 text-gray-300 cursor-pointer hover:text-white hover w-full' >{el.name}</label>
+                        <label onMouseEnter={ ()=>hoverCountry(el.name)} className='text-xs w-1/2 p-2 hover:text-white text-gray-300 cursor-pointer w-full' >{el.name}</label>
                     )
                 })}
             </div>
-            <div className='w-1/2 flex px-2 flex-col overflow-auto h-72' >
+            <div className='w-1/2 flex px-2 flex-col overflow-auto scrollbar scrollbar-w-1 scrollbar-thumb-white scrollbar-track-gray-600 h-72' >
               {determineDisplayCities()}
             </div>
         </div>
