@@ -3,16 +3,14 @@ import Passengers from "./Tabs/Passengers";
 import TravelFrom from "./Tabs/TravelFrom";
 import TravelTo from "./Tabs/TravelTo";
 import Departure from "./Tabs/Departure";
-import Return from "./Tabs/Return";
 import { DateUtils } from 'react-day-picker';
-import {format} from 'date-fns';
+import { format } from 'date-fns';
 
 interface IPassengers {
   adult: number;
   child: number;
   infant: number;
 }
-
 
 interface ITravel {
   fromCountry: string;
@@ -23,11 +21,16 @@ interface ITravel {
   return: string;
 }
 
+interface IRange {
+  from: any;
+  to: any;
+}
+
 const SearchInputs = () => {
 
   const [way, setWay] = useState(true);
   const [openedTab, setTab] = useState('none');
-  const [range, setRange] = useState<any>({
+  const [range, setRange] = useState<IRange>({
     from: null,
     to: null
   });
@@ -78,47 +81,40 @@ const SearchInputs = () => {
     }
   };
 
-  const handleCityFrom = (country:string, city:string) => {
-    setTravel({...travel, fromCountry: country, fromCity: city});
+  const handleCityFrom = (country: string, city: string) => {
+    setTravel({ ...travel, fromCountry: country, fromCity: city });
     travellingToRef.current?.focus();
     setTab('travelTo')
-};
-const handleCityTo = (country:string, city:string) => {
-  setTravel({...travel, toCountry: country, toCity: city});
-  departureRef.current?.focus();
-  setTab('departure')
-};
+  };
+  const handleCityTo = (country: string, city: string) => {
+    setTravel({ ...travel, toCountry: country, toCity: city });
+    departureRef.current?.focus();
+    setTab('departure')
+  };
 
 
-const handleDayClick = (day: any) => {
+  const handleDayClick = (day: any) => {
     const dateRange = DateUtils.addDayToRange(day, range);
     setRange(dateRange);
-}
+  }
 
-const handleDatesClear = () => {
-  setRange({from: null, to:null});
-}
 
   const handleWayChoice = (ways: Boolean) => {
     if (ways) {
       setWay(false);
-      setRange(range.from && {...range, to: range.from} )
+      setRange(range.from && { ...range, to: range.from })
     } else {
       setWay(true);
       setTab('departure');
     }
   }
 
-  console.log(range.from, 'from')
-  console.log(range.to, 'to')
-
-
   const displayTab = () => {
     if (openedTab === 'none')
       return
 
     if (openedTab === 'travelFrom') {
-      return <TravelFrom  handleCityFrom={handleCityFrom} />
+      return <TravelFrom handleCityFrom={handleCityFrom} />
     }
 
     if (openedTab === 'travelTo') {
@@ -130,11 +126,7 @@ const handleDatesClear = () => {
     }
 
     if (openedTab === 'departure') {
-      return <Departure handleDayClick={handleDayClick} range={range} handleDatesClear={handleDatesClear} />
-    }
-
-    if (openedTab === 'return') {
-      return <Return />
+      return <Departure handleDayClick={handleDayClick} range={range} />
     }
   };
 
@@ -149,26 +141,26 @@ const handleDatesClear = () => {
     console.log('SEARCH TRAVEL')
   }
 
-  const handleInput = (name:string) => {
+  const handleInput = (name: string) => {
 
   }
 
   return (
 
-    <div className={`flex justify-${openedTab === 'none' ? 'center' :'end'} sm:flex-row flex-col`}>
-      <div className='bg-gray-700 w-full md:mr-2 rounded-lg p-1 lg:w-72 border-2 flex flex-col ' >
-        <input onChange={()=>handleInput('travelFrom')} onClick={setTravelFrom} placeholder="Travelling from" value={setValueFrom()} className='h-10 w-full mb-2 p-2 text-sm' /> 
-        <input onChange={()=>handleInput('travelTo')} onClick={() => setTab('travelTo')} ref={travellingToRef} placeholder="Travelling to" value={setValueTo()} className='h-10 text-sm w-full mb-2 p-2' />
-        <input readOnly value={`${passengers.adult} adult, ${passengers.child} child, ${passengers.infant} infant`} onClick={() => setTab('passengers')} className='cursor-pointer text-sm h-10 w-full mb-2 p-2'/> 
+    <div className={`flex justify-${openedTab === 'none' ? 'center' : 'end'} sm:flex-row h-72 flex-col`}>
+      <div className='bg-gray-700 w-full h-72 md:mr-2 rounded-lg p-1 lg:w-72 border-2 flex flex-col' >
+        <input onChange={() => handleInput('travelFrom')} onClick={setTravelFrom} placeholder="Travelling from" value={setValueFrom()} className='h-10 w-full mb-2 p-2 text-sm' />
+        <input onChange={() => handleInput('travelTo')} onClick={() => setTab('travelTo')} ref={travellingToRef} placeholder="Travelling to" value={setValueTo()} className='h-10 text-sm w-full mb-2 p-2' />
+        <input readOnly value={`${passengers.adult} adult, ${passengers.child} child, ${passengers.infant} infant`} onClick={() => setTab('passengers')} className='cursor-pointer text-sm h-10 w-full mb-2 p-2' />
         <input readOnly onClick={() => setTab('departure')} ref={departureRef} value={range.from ? format(range.from, 'dd MMMM yyyy') : ''} placeholder="Departure" className='cursor-pointer text-sm h-10 w-full mb-2 p-2' />
-       {!way ? <div  className='h-10 w-full mb-2 p-2' ></div> :
-       <input readOnly onClick={() => setTab('departure')} value={range.to ? format(range.to, 'dd MMMM yyyy'): ''} placeholder={!way ? '' : 'Return'} className='h-10 text-sm w-full mb-2 p-2 cursor-pointer' />
-      } 
+        {!way ? <div className='h-10 w-full mb-2 p-2' ></div> :
+          <input readOnly onClick={() => setTab('departure')} value={range.to ? format(range.to, 'dd MMMM yyyy') : ''} placeholder={!way ? '' : 'Return'} className='h-10 text-sm w-full mb-2 p-2 cursor-pointer' />
+        }
         <div className="flex w-full rounded-sm" role="group">
           <button onClick={() => handleWayChoice(true)} className={`bg-${!way ? `blue-400` : `white`} cursor-pointer w-full text-sm text-${way ? `blue-400` : `white`} border border-blue-500  outline-none focus:shadow-outline`}>One way</button>
           <button onClick={() => handleWayChoice(false)} className={`bg-${way ? `blue-400` : `white`} cursor-pointer w-full text-sm text-${!way ? `blue-400` : `white`} border border-blue-500 outline-none focus:shadow-outline`}>Return</button>
         </div>
-        <div className="flex  w-full rounded-sm" role="group">
+        <div className="flex items-end w-full rounded-sm" role="group">
           <button onClick={searchTravel} className="bg-blue-500 cursor-pointer w-full text-sm text-white border border-blue-500 p-2 mt-2  outline-none focus:shadow-outline" >Search</button>
         </div>
       </div>

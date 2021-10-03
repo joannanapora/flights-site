@@ -65,15 +65,17 @@ const TravelFrom = ({handleCityFrom}:ITravelFrom) => {
     }
 
     return (
-        <div className='bg-gray-700 w-full rounded-lg lg:w-72 p-1 border-2 flex' >
-            <div className='w-1/2 flex px-2 flex-col overflow-auto scrollbar scrollbar-w-1 scrollbar-thumb-white scrollbar-track-gray-600 h-72' >
+        <div className='bg-gray-700 w-full rounded-lg lg:w-72 p-1 border-2 flex'>
+
+        <div className='w-1/2 flex mb-2 px-2 flex-col overflow-auto scrollbar scrollbar-w-1 scrollbar-thumb-white scrollbar-track-gray-600 h-74' >
+            
                 {countries.map((el) => {
                     return (
                         <label onMouseEnter={ ()=>hoverCountry(el.name)} className='text-xs w-1/2 p-2 hover:text-white text-gray-300 cursor-pointer w-full' >{el.name}</label>
                     )
                 })}
             </div>
-            <div className='w-1/2 flex px-2 flex-col overflow-auto scrollbar scrollbar-w-1 scrollbar-thumb-white scrollbar-track-gray-600 h-72' >
+            <div className='w-1/2 flex  mb-2  px-2 flex-col overflow-auto scrollbar scrollbar-w-1 scrollbar-thumb-white scrollbar-track-gray-600 h-74' >
               {determineDisplayCities()}
             </div>
         </div>

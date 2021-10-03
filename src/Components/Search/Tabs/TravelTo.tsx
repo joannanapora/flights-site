@@ -50,7 +50,7 @@ interface ITravelTo {
 
 const TravelTo = ({handleCityTo}:ITravelTo) => {
 
-    const [hoverCity, setHoverCity] = useState<string>('Argentina');
+    const [hoverCity, hoverCountry] = useState<string>('Argentina');
 
     const determineDisplayCities = () => {
       return  countries.map((country)=>{
@@ -65,15 +65,17 @@ const TravelTo = ({handleCityTo}:ITravelTo) => {
     }
 
     return (
-        <div className='bg-gray-700 w-full rounded-lg lg:w-72 p-1 border-2 flex' >
-           <div className='w-1/2 flex px-2 flex-col overflow-auto scrollbar scrollbar-w-1 scrollbar-thumb-white scrollbar-track-gray-600 h-72' >
+        <div className='bg-gray-700 w-full rounded-lg lg:w-72 p-1 border-2 flex'>
+
+        <div className='w-1/2 mb-2 flex px-2 flex-col overflow-auto scrollbar scrollbar-w-1 scrollbar-thumb-white scrollbar-track-gray-600 h-74' >
+               
                 {countries.map((el) => {
                     return (
-                        <label onMouseEnter={ ()=>setHoverCity(el.name)} className='text-xs w-1/2 p-2 text-gray-300 cursor-pointer hover:text-white hover w-full' >{el.name}</label>
+                        <label onMouseEnter={ ()=>hoverCountry(el.name)} className='text-xs w-1/2 p-2 hover:text-white text-gray-300 cursor-pointer w-full' >{el.name}</label>
                     )
                 })}
             </div>
-            <div className='w-1/2 flex px-2 flex-col overflow-auto scrollbar scrollbar-w-1 scrollbar-thumb-white scrollbar-track-gray-600 h-72' >
+            <div className='w-1/2 mb-2 flex px-2 flex-col overflow-auto scrollbar scrollbar-w-1 scrollbar-thumb-white scrollbar-track-gray-600 h-74' >
               {determineDisplayCities()}
             </div>
         </div>

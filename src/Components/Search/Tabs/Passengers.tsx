@@ -12,8 +12,8 @@ interface IPassengers {
 const Passengers = ({handlePassengers, adults, children, infants}:IPassengers) => {
 
     return (
-      <div className='bg-gray-700 w-full lg:w-72 p-1 border-2 flex flex-col ' >
-           <div className='overflow-auto h-72' >
+      <div className='bg-gray-700 w-full lg:w-72 rounded-lg border-2 p-1 flex flex-col items-center justify-center' >
+           <div className='overflow-auto h-74 w-full' >
         <label className='text-sm text-gray-300' >adult (14+)</label>
         <div className=' bg-white text-gray-500 font-serif cursor-pointer h-8 rounded-sm  w-full mb-2 flex items-center justify-between w-full' >
         <button disabled={adults<2} onClick={()=>handlePassengers('adult-1')} className='hover:bg-blue-200 h-full w-1/3 flex items-center justify-center'>
