@@ -4,6 +4,8 @@ import TravelFrom from "./Tabs/TravelFrom";
 import TravelTo from "./Tabs/TravelTo";
 import Departure from "./Tabs/Departure";
 import Return from "./Tabs/Return";
+import { DateUtils } from 'react-day-picker';
+import {format} from 'date-fns';
 
 interface IPassengers {
   adult: number;
@@ -17,12 +19,18 @@ interface ITravel {
   fromCity: string;
   toCountry: string;
   toCity: string;
+  departure: string;
+  return: string;
 }
 
 const SearchInputs = () => {
 
   const [way, setWay] = useState(true);
   const [openedTab, setTab] = useState('none');
+  const [range, setRange] = useState<any>({
+    from: null,
+    to: null
+  });
   const [passengers, setPassengers] = useState<IPassengers>({
     adult: 1,
     child: 0,
@@ -33,9 +41,12 @@ const SearchInputs = () => {
     fromCity: '',
     toCountry: '',
     toCity: '',
+    departure: '',
+    return: '',
   });
 
   const travellingToRef = useRef<HTMLInputElement>(null);
+  const departureRef = useRef<HTMLInputElement>(null);
 
 
   const handlePassengers = (passengerType: string) => {
@@ -74,17 +85,32 @@ const SearchInputs = () => {
 };
 const handleCityTo = (country:string, city:string) => {
   setTravel({...travel, toCountry: country, toCity: city});
+  departureRef.current?.focus();
+  setTab('departure')
+};
+
+
+const handleDayClick = (day: any) => {
+    const dateRange = DateUtils.addDayToRange(day, range);
+    setRange(dateRange);
 }
 
+const handleDatesClear = () => {
+  setRange({from: null, to:null});
+}
 
   const handleWayChoice = (ways: Boolean) => {
     if (ways) {
-      setWay(false)
+      setWay(false);
+      setRange(range.from && {...range, to: range.from} )
     } else {
       setWay(true);
-      setTab('none')
+      setTab('departure');
     }
   }
+
+  console.log(range.from, 'from')
+  console.log(range.to, 'to')
 
 
   const displayTab = () => {
@@ -104,7 +130,7 @@ const handleCityTo = (country:string, city:string) => {
     }
 
     if (openedTab === 'departure') {
-      return <Departure />
+      return <Departure handleDayClick={handleDayClick} range={range} handleDatesClear={handleDatesClear} />
     }
 
     if (openedTab === 'return') {
@@ -119,26 +145,31 @@ const handleCityTo = (country:string, city:string) => {
     setTab('travelFrom');
   };
 
+  const searchTravel = () => {
+    console.log('SEARCH TRAVEL')
+  }
+
+  const handleInput = (name:string) => {
+
+  }
 
   return (
 
     <div className={`flex justify-${openedTab === 'none' ? 'center' :'end'} sm:flex-row flex-col`}>
       <div className='bg-gray-700 w-full md:mr-2 rounded-lg p-1 lg:w-72 border-2 flex flex-col ' >
-        <input onClick={setTravelFrom} placeholder="Travelling from" value={setValueFrom()} className='h-10 w-full mb-2 p-2 text-sm' /> 
-        <input onClick={() => setTab('travelTo')} ref={travellingToRef} placeholder="Travelling to" value={setValueTo()} className='h-10 text-sm w-full mb-2 p-2' />
-        <div onClick={() => setTab('passengers')} className='cursor-pointer h-10 text-sm text-gray-400 w-full mb-2 p-2 bg-white flex justify-between' >
-          <p>Passengers:</p>
-          <div className='text-xs font-bold text-black flex items-center w-full justify-evenly' >
-            <p>{passengers.adult} adult</p>
-            <p>{passengers.child} child</p>
-            <p>{passengers.infant} infant</p>
-          </div>
+        <input onChange={()=>handleInput('travelFrom')} onClick={setTravelFrom} placeholder="Travelling from" value={setValueFrom()} className='h-10 w-full mb-2 p-2 text-sm' /> 
+        <input onChange={()=>handleInput('travelTo')} onClick={() => setTab('travelTo')} ref={travellingToRef} placeholder="Travelling to" value={setValueTo()} className='h-10 text-sm w-full mb-2 p-2' />
+        <input readOnly value={`${passengers.adult} adult, ${passengers.child} child, ${passengers.infant} infant`} onClick={() => setTab('passengers')} className='cursor-pointer text-sm h-10 w-full mb-2 p-2'/> 
+        <input readOnly onClick={() => setTab('departure')} ref={departureRef} value={range.from ? format(range.from, 'dd MMMM yyyy') : ''} placeholder="Departure" className='cursor-pointer text-sm h-10 w-full mb-2 p-2' />
+       {!way ? <div  className='h-10 w-full mb-2 p-2' ></div> :
+       <input readOnly onClick={() => setTab('departure')} value={range.to ? format(range.to, 'dd MMMM yyyy'): ''} placeholder={!way ? '' : 'Return'} className='h-10 text-sm w-full mb-2 p-2 cursor-pointer' />
+      } 
+        <div className="flex w-full rounded-sm" role="group">
+          <button onClick={() => handleWayChoice(true)} className={`bg-${!way ? `blue-400` : `white`} cursor-pointer w-full text-sm text-${way ? `blue-400` : `white`} border border-blue-500  outline-none focus:shadow-outline`}>One way</button>
+          <button onClick={() => handleWayChoice(false)} className={`bg-${way ? `blue-400` : `white`} cursor-pointer w-full text-sm text-${!way ? `blue-400` : `white`} border border-blue-500 outline-none focus:shadow-outline`}>Return</button>
         </div>
-        <input onClick={() => setTab('departure')} placeholder="Departure" className='cursor-pointer text-sm h-10 w-full mb-2 p-2' />
-        <input onClick={() => setTab('return')} disabled={!way} placeholder={!way ? '' : 'Return'} className='h-10 text-sm w-full mb-2 p-2 cursor-pointer' />
-        <div className="flex  w-full h-full items-end rounded-sm" role="group">
-          <button onClick={() => handleWayChoice(true)} className={`bg-${!way ? `blue-500` : `white`} cursor-pointer w-full text-sm text-${way ? `blue-500` : `white`} border border-blue-500  px-4 py-2 mx-0 outline-none focus:shadow-outline`}>One way</button>
-          <button onClick={() => handleWayChoice(false)} className={`bg-${way ? `blue-500` : `white`} cursor-pointer w-full text-sm text-${!way ? `blue-500` : `white`} border border-blue-500  px-4 py-2 mx-0 outline-none focus:shadow-outline`}>Return</button>
+        <div className="flex  w-full rounded-sm" role="group">
+          <button onClick={searchTravel} className="bg-blue-500 cursor-pointer w-full text-sm text-white border border-blue-500 p-2 mt-2  outline-none focus:shadow-outline" >Search</button>
         </div>
       </div>
       {displayTab()}
