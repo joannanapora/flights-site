@@ -10,11 +10,9 @@ import LandingPage from './Components/Landing Page';
 function App() {
   return (
     <div className="bg-gray-800">
-   
     <Header/>
     <Navigation/>
     <LandingPage/>
-
     </div>
   );
 }

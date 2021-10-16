@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { Transition } from "@headlessui/react";
+import {Link} from "react-router-dom"
 
 const Navigation = () => {
 
     const [isOpen, setIsOpen] = useState(false);
 
     return (
-        <div>
-            <nav className="bg-gray-800">
+<>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex items-center justify-between h-16">
                         <div className="flex items-center">
@@ -42,12 +42,12 @@ const Navigation = () => {
                                         Contact
                                     </a>
 
-                                    <a
-                                        href="#"
+                                    <Link
+                                        to='/login'
                                        className=" hover:bg-gray-700 text-white px-3 py-2 rounded-md text-sm font-medium"
                                     >
-                                        Reports
-                                    </a>
+                                        Login
+                                    </Link>
                                 </div>
                             </div>
                         </div>
@@ -148,8 +148,7 @@ const Navigation = () => {
                         </div>
                     )}
                 </Transition>
-            </nav>
-        </div>)
-};
+</>
+    );};
 
 export default Navigation;

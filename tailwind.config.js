@@ -5,7 +5,7 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage :{
-        'clouds-image' : "url('https://jooinn.com/images/large-puffy-clouds-2.jpg')"
+        'clouds-image' : "url('https://cdn.pixabay.com/photo/2018/03/07/19/51/grass-3206938_960_720.jpg')"
        }
     },
     screens: {
@@ -36,5 +36,10 @@ module.exports = {
   },
   plugins: [
     require("tailwindcss-scrollbar"),
+    plugin(function({ addBase, theme }) {
+      addBase({
+        'button': { background: theme('background.yellow') },
+      })
+    })
   ],
 }
