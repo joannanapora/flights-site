@@ -1,0 +1,2 @@
+export const ButtonClass = "py-4 px-8 font-bold flex text-white text-sm border-2 border-white hover:bg-yellow-600 rounded-3xl"
+export const ButtonSocial = "p-3  border-2 rounded-3xl font-semibold text-white inline-flex items-center space-x-2 rounded"

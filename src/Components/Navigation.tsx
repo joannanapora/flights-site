@@ -14,34 +14,6 @@ const Navigation = () => {
 
                             <div className="hidden md:block">
                                 <div className="ml-10 flex items-baseline space-x-4">
-                                    <a
-                                        href="#"
-                                        className=" hover:bg-gray-700 text-white px-3 py-2 rounded-md text-sm font-medium"
-                                    >
-                                        HOLIDAY 2022
-                                    </a>
-
-                                    <a
-                                        href="#"
-                                       className=" hover:bg-gray-700 text-white px-3 py-2 rounded-md text-sm font-medium"
-                                    >
-                                        BestSellers
-                                    </a>
-
-                                    <a
-                                        href="#"
-                                       className=" hover:bg-gray-700 text-white px-3 py-2 rounded-md text-sm font-medium"
-                                    >
-                                        Short Trips
-                                    </a>
-
-                                    <a
-                                        href="#"
-                                       className=" hover:bg-gray-700 text-white px-3 py-2 rounded-md text-sm font-medium"
-                                    >
-                                        Contact
-                                    </a>
-
                                     <Link
                                         to='/login'
                                        className=" hover:bg-gray-700 text-white px-3 py-2 rounded-md text-sm font-medium"

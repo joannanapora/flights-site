@@ -32,6 +32,9 @@ module.exports = {
   variants: {
     extend: {
       animation: ['motion-safe'],
+      animation: {
+        'spin-slow': 'spin 3s linear infinite',
+       }
     }
   },
   plugins: [
