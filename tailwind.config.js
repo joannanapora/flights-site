@@ -6,6 +6,13 @@ module.exports = {
     extend: {
       backgroundImage :{
         'clouds-image' : "url('https://cdn.pixabay.com/photo/2018/03/07/19/51/grass-3206938_960_720.jpg')"
+       },
+       minHeight: {
+        '0': '0',
+        '1/4': '25%',
+        '1/2': '50%',
+        '3/4': '75%',
+        'full': '100%',
        }
     },
     screens: {

@@ -1,18 +1,18 @@
 import React from 'react';
 import './App.css';
 import "tailwindcss/tailwind.css"
-
-import Header from './Components/Header';
-import Navigation from './Components/Navigation';
-import LandingPage from './Components/Landing Page';
+import Register from "./Components/Register/Registration";
+import Application from "./Components/Application/Application";
+import { Switch ,Route } from "react-router-dom";
 
 
 function App() {
   return (
     <div className="bg-gray-800">
-    <Header/>
-    <Navigation/>
-    <LandingPage/>
+    <Switch>
+        <Route exact path='/login' component={Register} />
+        <Route exact path='/' component={Application} />
+      </Switch>
     </div>
   );
 }
