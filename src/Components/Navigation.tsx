@@ -55,10 +55,10 @@ const Navigation = () => {
         <Loop/>
       </span>
     </div>
-    <div className='flex '>
+    <div onClick={()=>setIsOpen(isOpen === 'cat' ? '' : 'cat')} className='flex'>
     <div className='text-gray-500 ml-2 font-semibold items-center flex' >All Categories</div>
     <div className="flex text-gray-500 ml-2 items-center cursor-pointer">                            
-                                   <div className='w-full flex' onClick={()=>setIsOpen('cat')} >
+                                   <div className='w-full flex' >
                                    <ArrowDown  />
                                    </div>
                                 </div>
@@ -72,31 +72,30 @@ const Navigation = () => {
                                     >
                                     Sign In
                                 </Link>
+                             
                                         </div>
-             
-
+                                
                     <div className="flex md:hidden justify-between w-full">
                  <div className="border-2 py-3 mr-2 px-3 flex justify-between rounde-md rounded-md">
       <input className="flex-grow border-r-2 outline-none w-1/2 bg-gray-800 text-gray-100 pr-2 focus:text-white" type="text" placeholder="Search..." />
       <span className='pl-2'>
         <Loop/>
       </span>
-    
     </div>
     <div className="flex text-gray-500 mr-2 w-1/4 font-semibold text-sm items-center hover:text-white cursor-pointer">                            
-                                   <div className='w-full' onClick={()=>setIsOpen('cat')} >
+                                   <div className='w-full'    onClick={()=>setIsOpen(isOpen === 'cat' ? '' : 'cat')} >
                                    <ArrowDown  />
                                    </div>
                                 </div>
                         <button
-                           onClick={()=>setIsOpen('menu')}
+                           onClick={()=>setIsOpen(isOpen === 'menu' ? '' : 'menu')}
                             type="button"
                             className="bg-gray-900 inline-flex items-center justify-center w-1/4 p-4 rounded-md text-gray-400 hover:text-white hover:bg-gray-800"
                             aria-controls="mobile-menu"
                             aria-expanded="false"
                         >
                             <span className="sr-only">Open main menu</span>
-                            {!isOpen ? (
+                            {isOpen !== 'menu' ? (
                                 <svg
                                     className="block h-6 w-6"
                                     xmlns="http://www.w3.org/2000/svg"
@@ -166,10 +165,10 @@ const Navigation = () => {
                 leaveTo="opacity-0 scale-95"
             >
                 {(ref2) => (
-                    <div className="md:hidden" id="mobile-categories">
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t-2 mt-1 bg-gray-100">
                         <div ref={ref2} className="px-2 pt-2 pb-3 flex flex-wrap sm:px-3">
                             {categoryList.map((el)=>
-                        <p key={el.id} onClick={()=>handlePickingCategory(el.name)} className={`${el.picked ? 'bg-gray-700' :'bg-gray-800'} flex py-4 px-8 mx-1 text-white rounded-lg cursor-pointer`} >{el.name}</p>
+                        <p key={el.id} onClick={()=>handlePickingCategory(el.name)} className={`${el.picked ? 'bg-blue-500' :'bg-gray-800'} flex py-4 px-8 mx-1 text-white rounded-lg cursor-pointer`} >{el.name}</p>
                             )}
                         </div>
                     </div>
