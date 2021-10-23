@@ -21,7 +21,6 @@ const Registration = ({history}:IRegisteration) => {
   const handleRegister: SubmitHandler<IRegisteration> = data =>{ 
     console.log(data);
     history.push('/')
-    
   }
 
   const handleLoginSocial = (social:string) => {

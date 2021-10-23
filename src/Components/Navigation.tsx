@@ -1,32 +1,68 @@
 import React, { useState } from 'react';
 import { Transition } from "@headlessui/react";
 import { Link } from "react-router-dom"
+import {ArrowDown, Loop} from "../assets/svg";
 
 const Navigation = () => {
 
-    const [isOpen, setIsOpen] = useState(false);
+    interface ICategory {
+        name:string; 
+        id:number; 
+        picked:boolean
+    }
+
+    const [isOpen, setIsOpen] = useState<string>("");
+    
+    const categories:ICategory[] = [
+        {
+        name: "Furniture",
+        id: 1,
+        picked: false
+    },
+    {
+        name: "Toys",
+        id: 2,
+        picked: false
+    },
+    {
+        name: "Clothes",
+        id: 3,
+        picked: false
+    },
+
+]
+    const [categoryList, setCategoryList] =  useState<ICategory[]>(categories);
+
+    const handlePickingCategory = (category:string) => {
+        const newList:ICategory[] = categoryList.map((el)=>{
+            if (el.name === category) {
+                return {...el, picked: !el.picked}
+            }
+            return el
+        })
+        setCategoryList(newList);
+    }
 
     return (
         <>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-16">
                     <div className="flex items-center">
-                        <div className="hidden md:flex md:w-full md:justify-evenly md:block">
-                            <div className='flex items-baseline' >
-                                <div className="flex p-2 w-72 border-2 space-x-4 rounded-lg">
-                                <input className="flex-grow outline-none bg-gray-800 text-gray-100 w-52 pr-2 focus:text-white" type="text" placeholder="Search arti..." />
+                        <div className="hidden flex w-full md:flex md:w-full md:justify-evenly md:block">
+                        <div className="border-2 py-3 mr-2 px-3 flex justify-between rounde-md rounded-md">
+      <input className="flex-grow w-68 outline-none bg-gray-800 text-gray-100 pr-2 border-r-2 focus:text-white" type="text" placeholder="Search..." />
+      <span className='pl-2'>
+        <Loop/>
+      </span>
+    </div>
+    <div className='flex '>
+    <div className='text-gray-500 ml-2 font-semibold items-center flex' >All Categories</div>
+    <div className="flex text-gray-500 ml-2 items-center cursor-pointer">                            
+                                   <div className='w-full flex' onClick={()=>setIsOpen('cat')} >
+                                   <ArrowDown  />
+                                   </div>
                                 </div>
-                                <div className="flex py-3 px-4 rounded-lg text-gray-500 font-semibold cursor-pointer">
-                                    <span>All categories</span>
-
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                                    </svg>
-                                </div>
-                                <div className="bg-gray-700 py-2 px-5 text-white rounded-lg hover:shadow-lg transition duration-3000 cursor-pointer">
-                                    <span>Search</span>
-                                </div>
-                                </div>
+                            </div>
                             </div>
                             </div>
                             <div  className="hidden md:flex ml-2" >
@@ -40,18 +76,22 @@ const Navigation = () => {
              
 
                     <div className="flex md:hidden justify-between w-full">
-                 <div className="border-2 py-3 mr-10 px-3 flex justify-between rounde-md rounded-md">
-      <input className="flex-grow outline-none bg-gray-800 text-gray-100 w-52 pr-2 focus:text-white" type="text" placeholder="Search..." />
-      <span>
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-400 hover:text-blue-400 transition duration-100 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-        </svg>
+                 <div className="border-2 py-3 mr-2 px-3 flex justify-between rounde-md rounded-md">
+      <input className="flex-grow border-r-2 outline-none w-1/2 bg-gray-800 text-gray-100 pr-2 focus:text-white" type="text" placeholder="Search..." />
+      <span className='pl-2'>
+        <Loop/>
       </span>
+    
     </div>
+    <div className="flex text-gray-500 mr-2 w-1/4 font-semibold text-sm items-center hover:text-white cursor-pointer">                            
+                                   <div className='w-full' onClick={()=>setIsOpen('cat')} >
+                                   <ArrowDown  />
+                                   </div>
+                                </div>
                         <button
-                            onClick={() => setIsOpen(!isOpen)}
+                           onClick={()=>setIsOpen('menu')}
                             type="button"
-                            className="bg-gray-900 inline-flex items-center justify-center p-4 rounded-md text-gray-400 hover:text-white hover:bg-gray-800"
+                            className="bg-gray-900 inline-flex items-center justify-center w-1/4 p-4 rounded-md text-gray-400 hover:text-white hover:bg-gray-800"
                             aria-controls="mobile-menu"
                             aria-expanded="false"
                         >
@@ -95,7 +135,7 @@ const Navigation = () => {
             </div>
 
             <Transition
-                show={isOpen}
+                show={isOpen === "menu"}
                 enter="transition ease-out duration-100 transform"
                 enterFrom="opacity-0 scale-95"
                 enterTo="opacity-100 scale-100"
@@ -103,43 +143,34 @@ const Navigation = () => {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
             >
-                {(ref) => (
+                {(ref1) => (
                     <div className="md:hidden" id="mobile-menu">
-                        <div ref={ref} className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                            <a
-                                href="#"
-                                className="hover:bg-gray-700 text-white block px-3 py-2 rounded-md text-base font-medium"
-                            >
-                                Dashboard
-                            </a>
-
-                            <a
-                                href="#"
-                                className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                            >
-                                Team
-                            </a>
-
-                            <a
-                                href="#"
-                                className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                            >
-                                Projects
-                            </a>
-
-                            <a
-                                href="#"
-                                className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                            >
-                                Calendar
-                            </a>
-
-                            <a
-                                href="#"
-                                className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                            >
-                                Reports
-                            </a>
+                        <div ref={ref1} className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                        <Link
+                                    to='/login'
+                                    className="flex py-2 px-5 text-white rounded-lg cursor-pointer w-full justify-center"
+                                    >
+                                    Sign In
+                                </Link>
+                        </div>
+                    </div>
+                )}
+            </Transition>
+            <Transition
+                 show={isOpen === "cat"}
+                enter="transition ease-out duration-100 transform"
+                enterFrom="opacity-0 scale-95"
+                enterTo="opacity-100 scale-100"
+                leave="transition ease-in duration-75 transform"
+                leaveFrom="opacity-100 scale-100"
+                leaveTo="opacity-0 scale-95"
+            >
+                {(ref2) => (
+                    <div className="md:hidden" id="mobile-categories">
+                        <div ref={ref2} className="px-2 pt-2 pb-3 flex flex-wrap sm:px-3">
+                            {categoryList.map((el)=>
+                        <p key={el.id} onClick={()=>handlePickingCategory(el.name)} className={`${el.picked ? 'bg-gray-700' :'bg-gray-800'} flex py-4 px-8 mx-1 text-white rounded-lg cursor-pointer`} >{el.name}</p>
+                            )}
                         </div>
                     </div>
                 )}
