@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Email, User, Password, SpinnerButton, Facebook,Google,Twitter } from '../../assets/svg';
 import { Transition } from '@headlessui/react'
-import {ButtonClass, ButtonSocial} from "../../assets/classNames";
+import {ButtonClassLight, ButtonClassDark, ButtonSocial} from "../../assets/classNames";
+import giveaway from "../../assets/giveaway.png";
 
 
 interface IRegisteration {
@@ -30,11 +31,11 @@ const Registration = ({history}:IRegisteration) => {
 
   return (
     <div className="max-w-7xl min-h-screen mx-auto flex-col md:flex-row p-4 flex">
-      <div className='md:w-2/5 w-full md:rounded-l-lg bg-gray-700 p-4' >
-        <p className='text-white '>GIVEAWAY LOGO</p>
-        <div className='w-full md:py-20 min-h-full justify-center items-center flex flex-col'>
-          <h1 className='py-12 text-4xl text-white' >Welcome Back!</h1>
-          <div className='w-full text-center justify-center flex py-2 text-sm text-white' >To keep connected with us please login with your personal info.</div>
+      <div className='md:w-2/5 w-full md:rounded-l-lg bg-gray-200 p-4' >
+        <div className='w-full min-h-full justify-center items-center flex flex-col'>
+        <img id='logo' alt='' src={giveaway} />
+          <h1 className='py-12 text-4xl' >Welcome Back!</h1>
+          <div className='w-full text-center justify-center flex py-2 text-sm' >To keep connected with us please login with your personal info.</div>
           <Transition
             show={wantLogin}
             enter="transition ease duration-700 transform"
@@ -53,14 +54,14 @@ const Registration = ({history}:IRegisteration) => {
               <input className="bg-gray-100 outline-none text-sm" type="text" placeholder="Password" />
             </div>
             <div className='w-full flex justify-center py-8' >
-              <button onClick={() => setWantLogin(true)} className={ButtonClass}>
+              <button onClick={() => setWantLogin(true)} className={ButtonClassDark}>
                 LOGIN
               </button>
             </div>
           </Transition>
           {!wantLogin &&
             <div className='py-8' >
-              <button onClick={() => setWantLogin(true)} className={ButtonClass}>
+              <button onClick={() => setWantLogin(true)} className={ButtonClassDark}>
                 SIGN IN
               </button>
             </div>
@@ -100,7 +101,7 @@ const Registration = ({history}:IRegisteration) => {
               
              </div>
               <div className='py-8 w-full flex justify-center' >
-                <button type='submit' disabled={loading} className={ButtonClass}>
+                <button type='submit' disabled={loading} className={ButtonClassLight}>
                   {loading && <SpinnerButton />}
                   REGISTER
                 </button>
