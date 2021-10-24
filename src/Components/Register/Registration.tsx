@@ -34,7 +34,7 @@ const Registration = ({history}:IRegisteration) => {
         <div className='w-full min-h-full justify-center items-center flex flex-col'>
         <img id='logo' alt='' src={giveaway} />
           <h1 className='py-12 text-4xl' >Welcome Back!</h1>
-          <div className='w-full text-center justify-center flex py-2 text-sm' >To keep connected with us please login with your personal info.</div>
+          <div className='w-full text-center justify-center flex py-2 pb-6 text-sm' >To keep connected with us please login with Facebook, Twitter or Gmail</div>
           <Transition
             show={wantLogin}
             enter="transition ease duration-700 transform"
@@ -44,6 +44,20 @@ const Registration = ({history}:IRegisteration) => {
             leaveFrom="opacity-100 translate-y-0"
             leaveTo="opacity-0 -translate-y-full"
           >
+              <div className="flex items-center justify-center">
+            <div className="flex flex-wrap justify-center gap-2">
+              <button onClick={()=>handleLoginSocial('facebook')} className={`${ButtonSocial} bg-gray-700 hover:bg-blue-500`}>
+                <Facebook/>
+              </button>
+                 <button onClick={()=>handleLoginSocial('google')} className={`${ButtonSocial} bg-gray-700 hover:bg-red-500`}>
+               <Google/>
+              </button>
+                 <button onClick={()=>handleLoginSocial('twitter')} className={`${ButtonSocial} bg-gray-700 hover:bg-blue-400`}>
+               <Twitter/>
+              </button>
+            </div>
+          </div>
+          <p className='pt-8 text-sm text-gray-700 w-full text-center' >or use your email address</p>
             <div className="flex bg-gray-100 p-4 w-72 space-x-4 rounded-lg mt-8">
               <Email />
               <input className="bg-gray-100 outline-none text-sm" type="text" placeholder="Email" />
@@ -65,11 +79,13 @@ const Registration = ({history}:IRegisteration) => {
               </button>
             </div>
           }
+        <div onClick={()=>history.push('/')} className='cursor-pointer text-md font-bold my-10'> {`< GO BACK TO WEBSITE`}</div>
         </div>
       </div>
       <div className='md:w-3/5 w-full md:rounded-r-lg bg-gray-900 p-4' >
         <div className='w-full min-h-full justify-center items-center flex flex-col'>
           <h1 className='p-4 py-12 text-4xl text-white' >Create Account</h1>
+          <div className='w-full text-white justify-center flex py-2 pb-6 text-sm' >To start a journey with us please register with Facebook, Twitter or Gmail</div>
           <div className="flex items-center justify-center">
             <div className="flex flex-wrap justify-center gap-2">
               <button onClick={()=>handleLoginSocial('facebook')} className={`${ButtonSocial} hover:bg-blue-500`}>

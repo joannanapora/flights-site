@@ -37,3 +37,59 @@ export const ArrowDown = () =>    <svg xmlns="http://www.w3.org/2000/svg" classN
 export const Loop = () =>  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-400 hover:text-blue-400 transition duration-100 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
 </svg>
+
+export const Time = () =>  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+</svg>
+
+export const Tag = () =>  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" /></svg>
+
+export const Location = () =>  
+<svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+</svg>
+
+export const Pause = () =>  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+</svg>
+
+export const Left = () =>  <svg xmlns="http://www.w3.org/2000/svg" className="h-full w-6 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+</svg>
+
+export const Right = () =>  <svg xmlns="http://www.w3.org/2000/svg" className="h-full cursor-pointer w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+</svg>
+
+export const Hamburger = () =>  <svg
+className="block h-6 w-6"
+xmlns="http://www.w3.org/2000/svg"
+fill="none"
+viewBox="0 0 24 24"
+stroke="currentColor"
+aria-hidden="true"
+>
+<path
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    strokeWidth="2"
+    d="M4 6h16M4 12h16M4 18h16"
+/>
+</svg>
+
+export const CloseMenu = () =>  <svg
+className="block h-6 w-6"
+xmlns="http://www.w3.org/2000/svg"
+fill="none"
+viewBox="0 0 24 24"
+stroke="currentColor"
+aria-hidden="true"
+>
+<path
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    strokeWidth="2"
+    d="M6 18L18 6M6 6l12 12"
+/>
+</svg>

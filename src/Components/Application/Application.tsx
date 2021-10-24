@@ -1,6 +1,7 @@
 import React from "react";
 import Header from '../../Components/Header';
 import Navigation from '../../Components/Navigation';
+import ItemsList from "../Search/ItemsList";
 
 const Application = () => {
 
@@ -8,6 +9,7 @@ const Application = () => {
     <>
     <Header/>
     <Navigation/>
+    <ItemsList/>
    </>
   );
 }
