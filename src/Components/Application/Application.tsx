@@ -1,16 +1,10 @@
 import React from "react";
-import Header from '../../Components/Header';
-import Navigation from '../../Components/Navigation';
-import ItemsList from "../Search/ItemsList";
+import Navigation from "../Navigation";
 
 const Application = () => {
 
   return (
-    <>
-    <Header/>
     <Navigation/>
-    <ItemsList/>
-   </>
   );
 }
 
