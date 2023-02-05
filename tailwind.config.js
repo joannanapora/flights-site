@@ -35,21 +35,5 @@ module.exports = {
       sans: ['Roboto', 'sans-serif'],
       serif: ['Roboto', 'serif'],
     },
-  },
-  variants: {
-    extend: {
-      animation: ['motion-safe'],
-      animation: {
-        'spin-slow': 'spin 3s linear infinite',
-       }
-    }
-  },
-  plugins: [
-    require("tailwindcss-scrollbar"),
-    plugin(function({ addBase, theme }) {
-      addBase({
-        'button': { background: theme('background.yellow') },
-      })
-    })
-  ],
+  }
 }
