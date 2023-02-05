@@ -1,7 +1,7 @@
 {
   "name": "throughne",
   "version": "0.1.0",
-  "homepage": "https://joannanapora.github.io/kalkulator-aneczki",
+  "homepage": "https://joannanapora.github.io/kalkulator-aneczki/",
   "private": true,
   "dependencies": {
     "@headlessui/react": "^1.4.1",
@@ -36,6 +36,7 @@
   },
   "scripts": {
     "build:tailwind": "tailwindcss build -i tailwind.css -o src/tailwind.output.css",
+    "gh-pages:404": "cp build/index.html build/404.html",
     "prestart": "npm run build:tailwind",
     "prebuild": "npm run build:tailwind",
     "start": "react-scripts start",
