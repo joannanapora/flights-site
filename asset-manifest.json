@@ -1,15 +1,13 @@
 {
   "files": {
     "main.css": "/kalkulator-aneczki/static/css/main.68f431a4.chunk.css",
-    "main.js": "/kalkulator-aneczki/static/js/main.9cdefe54.chunk.js",
-    "main.js.map": "/kalkulator-aneczki/static/js/main.9cdefe54.chunk.js.map",
-    "runtime-main.js": "/kalkulator-aneczki/static/js/runtime-main.08f28e19.js",
-    "runtime-main.js.map": "/kalkulator-aneczki/static/js/runtime-main.08f28e19.js.map",
+    "main.js": "/kalkulator-aneczki/static/js/main.0d5de30a.chunk.js",
+    "main.js.map": "/kalkulator-aneczki/static/js/main.0d5de30a.chunk.js.map",
+    "runtime-main.js": "/kalkulator-aneczki/static/js/runtime-main.25e639b4.js",
+    "runtime-main.js.map": "/kalkulator-aneczki/static/js/runtime-main.25e639b4.js.map",
     "static/css/2.637f5471.chunk.css": "/kalkulator-aneczki/static/css/2.637f5471.chunk.css",
     "static/js/2.f2d88f7d.chunk.js": "/kalkulator-aneczki/static/js/2.f2d88f7d.chunk.js",
     "static/js/2.f2d88f7d.chunk.js.map": "/kalkulator-aneczki/static/js/2.f2d88f7d.chunk.js.map",
-    "static/js/3.fdbdbf2f.chunk.js": "/kalkulator-aneczki/static/js/3.fdbdbf2f.chunk.js",
-    "static/js/3.fdbdbf2f.chunk.js.map": "/kalkulator-aneczki/static/js/3.fdbdbf2f.chunk.js.map",
     "index.html": "/kalkulator-aneczki/index.html",
     "static/css/2.637f5471.chunk.css.map": "/kalkulator-aneczki/static/css/2.637f5471.chunk.css.map",
     "static/css/main.68f431a4.chunk.css.map": "/kalkulator-aneczki/static/css/main.68f431a4.chunk.css.map",
@@ -17,10 +15,10 @@
     "static/media/pawsss.38cd121c.png": "/kalkulator-aneczki/static/media/pawsss.38cd121c.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.08f28e19.js",
+    "static/js/runtime-main.25e639b4.js",
     "static/css/2.637f5471.chunk.css",
     "static/js/2.f2d88f7d.chunk.js",
     "static/css/main.68f431a4.chunk.css",
-    "static/js/main.9cdefe54.chunk.js"
+    "static/js/main.0d5de30a.chunk.js"
   ]
 }
