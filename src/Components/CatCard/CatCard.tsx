@@ -1,8 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
-import Swipe from "react-easy-swipe";
-import { DateUtils } from "react-day-picker";
-import { daysInWeek } from "date-fns";
+import React, { useState } from "react";
 
 const CarouselData = [
   {
